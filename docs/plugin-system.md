@@ -49,6 +49,16 @@ The plugin system is designed around three principles:
 Bundled plugins are small enough to ship in the main file. Lazy plugins are
 heavy and only load when their syntax is actually encountered in the markdown.
 
+### Phase 4 Lazy Plugin Details
+
+| Plugin | CDN URL | Fallback | Trigger |
+|--------|---------|----------|---------|
+| highlight.js | jsdelivr `@highlightjs/cdn-assets@11` | unpkg | Code fence with non-empty lang |
+| mermaid | jsdelivr `mermaid@10` ESM | unpkg | Code fence with lang="mermaid" |
+| KaTeX | jsdelivr `katex@0.16.9` + texmath | unpkg | `$...$` or `$$...$$` in content |
+
+For full lazy loading architecture, see [docs/lazy-loading.md](lazy-loading.md).
+
 ## 4. PluginRegistry API
 
 ```js
