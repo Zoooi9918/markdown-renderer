@@ -20,6 +20,12 @@ graph TD
         L["src/plugins/bundled/<br/>8 plugin wrappers"]
     end
 
+        subgraph Lazy
+            M["src/plugins/lazy/highlight.js<br/>Syntax highlighting"]
+            N["src/plugins/lazy/mermaid.js<br/>Diagrams (ESM)"]
+            O["src/plugins/lazy/katex.js<br/>Math (texmath)"]
+        end
+
     subgraph Rules
         D["src/core/rules/heading-ids.js<br/>id='slug' on headings"]
         E["src/core/rules/callouts.js<br/>Obsidian callouts"]
@@ -35,6 +41,9 @@ graph TD
     A --> J
     A --> K
     A --> L
+        A --> M
+        A --> N
+        A --> O
     B --> C
     B --> I
     I --> L
@@ -103,3 +112,9 @@ Wikilinks emit proper link tokens (not raw HTML) because:
 The plugin layer (Phase 3) sits between markdown-it and the custom rules.
 For the full plugin API, LazyPlugin interface, and LazyLoader documentation,
 see [docs/plugin-system.md](plugin-system.md).
+
+## Lazy Loading
+
+Heavy libraries (mermaid, KaTeX, highlight.js) are loaded from CDN on demand.
+For the lazy loading architecture, CDN fallback, and graceful degradation,
+see [docs/lazy-loading.md](lazy-loading.md).

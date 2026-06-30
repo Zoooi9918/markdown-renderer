@@ -249,3 +249,29 @@ HTML
 
 API
 : Application Programming Interface
+
+## Lazy Plugins
+
+### Code Block with Language (highlight.js)
+
+```python
+def hello():
+    print("world")
+```
+
+### Mermaid Diagram
+
+```mermaid
+graph TD
+  A --> B
+```
+
+### Inline Math (KaTeX)
+
+Einstein showed $E = mc^2$ and the quadratic formula is $x = \frac{-b \pm \sqrt{b^2-4ac}}{2a}$.
+
+### Block Math (KaTeX)
+
+$$
+\int_0^1 x^2 dx = \frac{1}{3}
+$$
