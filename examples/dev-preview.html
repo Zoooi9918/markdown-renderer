@@ -3,19 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>markdown-renderer — Dev Preview (Phase 3)</title>
-  <!--
-    Dev Preview — Phase 3 Smoke Test
-    =================================
-    This page loads the renderer as an ES module and renders test-content.md.
-    It is for developer verification ONLY — not for end users.
-
-    Loading strategy:
-    - markdown-it and bundled plugins are loaded from node_modules via a CDN (esm.sh)
-      since bare ES module imports from node_modules don't work in the browser
-      without a bundler. The CDN resolves the CJS→ESM transformation.
-    - The local src/index.js is loaded as a relative ES module.
-  -->
+  <title>markdown-renderer — Dev Preview (Phase 4)</title>
   <script type="importmap">
   {
     "imports": {
@@ -37,7 +25,9 @@
     body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; line-height: 1.6; color: #1a1a2e; background: #f8f9fa; padding: 2rem; max-width: 900px; margin: 0 auto; }
     h1.page-title { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #dee2e6; display: flex; align-items: center; gap: 0.5rem; }
     .badge { font-size: 0.75rem; background: #0066ff; color: #fff; padding: 0.15rem 0.5rem; border-radius: 999px; font-weight: 600; }
+    .badge-lazy { background: #6f42c1; }
     #plugin-status { background: #f4f4f5; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.85rem; overflow-x: auto; }
+    #lazy-status { background: #f0f0ff; padding: 1rem; border-radius: 6px; margin-bottom: 1rem; font-size: 0.85rem; overflow-x: auto; }
     article { background: #fff; padding: 2rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
     article h1, article h2, article h3 { margin-top: 1.5rem; margin-bottom: 0.5rem; }
     article h1 { border-bottom: 1px solid #eee; padding-bottom: 0.3rem; }
@@ -59,22 +49,24 @@
   </style>
 </head>
 <body>
-  <h1 class="page-title">🧪 Dev Preview — Phase 3 Plugin Layer <span class="badge">PLUGIN LAYER ACTIVE</span></h1>
+  <h1 class="page-title">
+    🧪 Dev Preview — Phase 4 Lazy Loading
+    <span class="badge">PLUGIN LAYER ACTIVE</span>
+    <span class="badge badge-lazy">LAZY LOADING</span>
+  </h1>
   <pre id="plugin-status">Loading plugins...</pre>
+  <pre id="lazy-status">Waiting for render...</pre>
   <article id="output"></article>
   <div id="error"></div>
 
   <script type="module">
-    import { MarkdownRenderer } from "../../src/index.js";
-      import { MarkdownRenderer } from "../src/index.js";
+    import { MarkdownRenderer } from "../src/index.js";
 
     try {
-      // Fetch the test content
       const response = await fetch("./test-content.md");
       if (!response.ok) throw new Error(`Failed to load test-content.md: ${response.status}`);
       const markdown = await response.text();
 
-      // Render with all rules enabled (default pack active)
       const renderer = new MarkdownRenderer({
         rules: {
           headingIds: true,
@@ -89,8 +81,25 @@
       document.getElementById("plugin-status").textContent =
         JSON.stringify(pluginList, null, 2);
 
-      const html = renderer.render(markdown);
+      // Async render with lazy loading
+      const html = await renderer.renderAsync(markdown);
       document.getElementById("output").innerHTML = html;
+
+      // Post-render: mermaid
+      if (renderer.getLoadedPlugins().includes("mermaid") &&
+          typeof window.markdownRendererMermaid !== "undefined") {
+        try {
+          await window.markdownRendererMermaid.run();
+        } catch (e) {
+          console.warn("mermaid post-render failed:", e.message);
+        }
+      }
+
+      // Show lazy load history
+      const history = renderer.getLoader().getLoadHistory();
+      const loaded = renderer.getLoadedPlugins();
+      document.getElementById("lazy-status").textContent =
+        JSON.stringify({ loaded, history }, null, 2);
     } catch (err) {
       const errorEl = document.getElementById("error");
       errorEl.textContent = `Error: ${err.message}`;
