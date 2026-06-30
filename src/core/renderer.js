@@ -188,6 +188,13 @@ export class MarkdownRenderer {
       if (token.type === "math_inline" || token.type === "math_block") {
         needs.add("katex");
       }
+        // Also scan token content for math patterns (markdown-it doesn't know
+        // about $...$ without texmath already loaded — chicken-and-egg problem)
+        if (token.content) {
+          if (/\$\$[\s\S]*?\$\$/.test(token.content) || /\$[^$\n]+\$/.test(token.content)) {
+            needs.add("katex");
+          }
+        }
       // Recurse into child tokens (e.g., list items, blockquotes)
       if (token.children && token.children.length) {
         for (const child of this._scanTokens(token.children)) {

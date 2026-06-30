@@ -29,7 +29,7 @@ export default {
   async load(loaderOpts = {}) {
     const { injectScript, injectStylesheet } = loaderOpts;
     try {
-      await injectStylesheet(this.cdnScript, this.fallbackStyle);
+      await injectStylesheet(this.cdnStyle, this.fallbackStyle);
       await injectScript(this.cdnScript, this.fallbackScript);
       await injectScript(this.texmathScript, this.fallbackTexmathScript);
     } catch (err) {

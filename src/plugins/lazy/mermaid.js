@@ -40,7 +40,7 @@ export default {
         const token = tokens[idx];
         const code = token.content.replace(/\n$/, "");
         if (token.info.trim() === "mermaid") {
-          return `<pre class="mermaid">${self.escapeHtml(code)}</pre>\n`;
+          return `<pre class="mermaid">${md.utils.escapeHtml(code)}</pre>\n`;
         }
         if (originalFence) {
           return originalFence(tokens, idx, opts, env, self);

@@ -44,14 +44,12 @@ export default {
             return hljs.highlight(str, { language: lang }).value;
           } catch (_) { /* fall through */ }
         }
-        if (this.options.highlighted) {
-          try {
-            const result = hljs.highlightAuto(str);
-            if (result.language) {
-              return hljs.highlight(str, { language: result.language }).value;
-            }
-          } catch (_) { /* fall through */ }
-        }
+        try {
+          const result = hljs.highlightAuto(str);
+          if (result.language) {
+            return hljs.highlight(str, { language: result.language }).value;
+          }
+        } catch (_) { /* fall through */ }
         return null; // fallback to default escaping
       };
     };
