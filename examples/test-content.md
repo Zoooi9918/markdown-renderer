@@ -208,3 +208,44 @@ Here is a PDF document: ![[document.pdf]]
 ### Unknown Extension Embed
 
 ![[data.unknown]]
+
+## Plugin Syntax
+
+### Mark (Highlight)
+
+This is ==marked text== and this is ==another highlight==.
+
+### Subscript
+
+Water is H~2~O and carbon monoxide is CO~2~.
+
+### Superscript
+
+Einstein showed E = mc^2^ and x^2^ means x squared.
+
+### Inserted Text
+
+This is ++inserted text++ and here is ++another insertion++.
+
+### Emoji Shortcodes
+
+I love coding :smile: and I want to launch :rocket: something :tada:.
+
+### Footnotes
+
+Here is a sentence with a footnote reference[^1]. And here is another one[^2].
+
+[^1]: This is the first footnote body.
+[^2]: This is the second footnote, which is longer and contains **bold text**.
+
+### Definition List
+
+Markdown
+: A lightweight markup language
+
+HTML
+: The standard markup language for Web pages
+: Can be extended with CSS and JavaScript
+
+API
+: Application Programming Interface
