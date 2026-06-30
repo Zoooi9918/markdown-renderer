@@ -18,8 +18,8 @@ Unlike `markdown-it` (Node-centric), `marked` (no plugin ecosystem), or `remark`
 ### CDN (one-tag inclusion)
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/Zoooi9918/md-render@latest/dist/md-render.umd.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zoooi9918/md-render@latest/dist/md-render.min.css">
+<script src="https://cdn.jsdelivr.net/gh/Zoooi9918/md-render@v0.1.0/dist/md-render.umd.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Zoooi9918/md-render@v0.1.0/dist/md-render.min.css">
 <script>
   const renderer = new MarkdownRenderer();
   document.getElementById("output").innerHTML = renderer.render("# Hello");
