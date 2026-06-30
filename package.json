@@ -1,6 +1,6 @@
 {
   "name": "md-render",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A performance-first markdown-to-HTML renderer with Obsidian-flavored extensions, distributed via CDN.",
   "main": "dist/md-render.umd.js",
   "module": "dist/md-render.esm.js",
@@ -56,5 +56,7 @@
     "csso": "^5.0.5",
     "esbuild": "^0.24.2",
     "rimraf": "^5.0.10"
-  }
+  },
+  "homepage": "https://Zoooi9918.github.io/md-render/",
+  "bugs": "https://github.com/Zoooi9918/md-render/issues"
 }
