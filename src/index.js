@@ -26,6 +26,10 @@ import { MarkdownRenderer } from "./core/renderer.js";
 export { MarkdownRenderer };
 export { createMarkdownIt } from "./core/markdown-it-instance.js";
 export * as rules from "./core/rules/index.js";
+export { PluginRegistry } from "./plugins/registry.js";
+export { LazyLoader } from "./plugins/lazy-loader.js";
+export { getDefaultPack } from "./plugins/default-pack.js";
+export * as bundledPlugins from "./plugins/bundled/index.js";
 
 /**
  * Convenience function for quick, one-off renders.
