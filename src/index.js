@@ -1,5 +1,3 @@
-// Entry point for markdown-renderer
-// Implementation TBD in Phase 2+
 /**
  * markdown-renderer
  *
@@ -24,7 +22,8 @@
  * const html = renderer.render('> [!tip] Pro tip here');
  */
 
-export { MarkdownRenderer } from "./core/renderer.js";
+import { MarkdownRenderer } from "./core/renderer.js";
+export { MarkdownRenderer };
 export { createMarkdownIt } from "./core/markdown-it-instance.js";
 export * as rules from "./core/rules/index.js";
 
@@ -40,5 +39,5 @@ export * as rules from "./core/rules/index.js";
  * @returns {string} The rendered HTML string
  */
 export default function render(markdownString, options) {
-	return new MarkdownRenderer(options).render(markdownString);
+  return new MarkdownRenderer(options).render(markdownString);
 }

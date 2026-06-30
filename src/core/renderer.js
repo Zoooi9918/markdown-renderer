@@ -7,7 +7,7 @@
  * @module renderer
  */
 
-import { createMarkdownIt } from "../markdown-it-instance.js";
+import { createMarkdownIt } from "./markdown-it-instance.js";
 import {
   applyHeadingIds,
   applyCallouts,
